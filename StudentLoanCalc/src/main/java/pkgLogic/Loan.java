@@ -111,7 +111,6 @@ public class Loan {
 		double PMT = Math.abs(FinanceLib.pmt(this.getInterestRate()/12,this.LoanPaymentCnt,this.LoanBeginAmount,this.LoanEndAmount,this.bCompoundingOption));
 		return PMT;
 		
-		//TODO delete this
 	}
 	
 }

@@ -54,7 +54,7 @@ public class Payment {
 	}
 	
 	
-//TODO delete this
+
 }
 
 
