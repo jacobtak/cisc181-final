@@ -51,7 +51,12 @@ public class LoanCalcViewController implements Initializable   {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		colPaymentNumber.setCellValueFactory(new PropertyValueFactory<>("paymentNbr"));
-		//TODO: Add a 'setCellValueFactor' entry for each column, mapping to each attribute in Payment
+		//TODO: Add a 'setCellValueFactory' entry for each column, mapping to each attribute in Payment
+		colPaymentNumber.setCellValueFactory(new PropertyValueFactory<>("dueDate"));
+		colPaymentNumber.setCellValueFactory(new PropertyValueFactory<>("pmt"));
+		colPaymentNumber.setCellValueFactory(new PropertyValueFactory<>("interest"));
+		colPaymentNumber.setCellValueFactory(new PropertyValueFactory<>("principle"));
+		colPaymentNumber.setCellValueFactory(new PropertyValueFactory<>("balance"));
 		
 		tvResults.setItems(paymentList);
 	}
