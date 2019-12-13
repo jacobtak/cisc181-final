@@ -7,8 +7,8 @@ import org.apache.poi.ss.formula.functions.FinanceLib;
 public class Loan {
 	
 	private LocalDate StartDate;
-	private double LoanBeginAmt;
-	private double LoanEndAmt;
+	private double LoanStartAmount;
+	private double LoanFinalAmount;
 	private double InterestRate;
 	private double AdditionalPayment;
 	private int LoanPaymentCnt;
@@ -19,19 +19,19 @@ public class Loan {
 	public Loan(LocalDate startDate, double loanAmount, double interestRate, double additionalPayment, int loanPaymentCnt) {
 		super(); 
 		this.StartDate = startDate;
-		LoanBeginAmt = loanAmount;
+		LoanStartAmount = loanAmount;
 		InterestRate = interestRate;
 		AdditionalPayment = additionalPayment;
 		LoanPaymentCnt = loanPaymentCnt;
 		bCompoundingOption = false;
-		LoanEndAmt = 0;
+		LoanFinalAmount = 0;
 		
-		double RemainingBalance = LoanBeginAmt;
+		double RemainingBalance = LoanStartAmount;
 		int LoanPaymentCnt = 1;
 		
 		while(RemainingBalance >= this.getPMT() ) {
 			Payment payment = new Payment(RemainingBalance, LoanPaymentCnt++, startDate = startDate.plusMonths(LoanPaymentCnt-2),this);
-			RemainingBalance = LoanEndAmt;
+			RemainingBalance = LoanFinalAmount;
 			loanPayments.add(payment);
 		
 		}
@@ -39,12 +39,12 @@ public class Loan {
 	
 	
 	
-	public Loan(LocalDate startDate, double LoanBeginAmt, double LoanEndAmt, double interestRate,
+	public Loan(LocalDate startDate, double LoanStartAmount, double LoanFinalAmount, double interestRate,
 			double additionalPayment, int loanPaymentCnt, boolean bCompoundingOption, ArrayList<Payment> loanPayments) {
 		super();
 		StartDate = startDate;
-		LoanBeginAmt = LoanBeginAmt;
-		LoanEndAmt = LoanEndAmt;
+		LoanStartAmount = LoanStartAmount;
+		LoanFinalAmount = LoanFinalAmount;
 		InterestRate = interestRate;
 		AdditionalPayment = additionalPayment;
 		LoanPaymentCnt = loanPaymentCnt;
@@ -60,15 +60,15 @@ public class Loan {
 
 
 
-	public double getLoanBeginAmt() {
-		return LoanBeginAmt;
+	public double getLoanStartAmount() {
+		return LoanStartAmount;
 	}
 
 
 
 
-	public double getLoanEndAmt() {
-		return LoanEndAmt;
+	public double getLoanFinalAmount() {
+		return LoanFinalAmount;
 	}
 
 
@@ -109,7 +109,7 @@ public class Loan {
 
 
 	public double getPMT() {
-		double PMT = Math.abs(FinanceLib.pmt(this.getInterestRate()/12,this.LoanPaymentCnt,this.LoanBeginAmt,this.LoanEndAmt,this.bCompoundingOption));
+		double PMT = Math.abs(FinanceLib.pmt(this.getInterestRate()/12,this.LoanPaymentCnt,this.LoanStartAmount,this.LoanFinalAmount,this.bCompoundingOption));
 		return PMT;
 		
 	}
