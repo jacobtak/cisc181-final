@@ -30,7 +30,7 @@ public class Loan {
 		int LoanPaymentCnt = 1;
 		
 		while(RemainingBalance >= this.getPMT() ) {
-			Payment payment = new Payment(RemainingBalance, LoanPaymentCnt++, startDate = startDate.plusMonths(1),this);
+			Payment payment = new Payment(RemainingBalance, LoanPaymentCnt++, startDate = startDate.plusMonths(LoanPaymentCnt-2),this);
 			RemainingBalance = LoanEndAmount;
 			loanPayments.add(payment);
 		

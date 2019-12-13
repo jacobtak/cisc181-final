@@ -115,7 +115,7 @@ public class LoanCalcViewController implements Initializable   {
 		
 		lblTotalPayments.setText(Double.toString(loan.getTotalPayments()));
 		lblTotalInterest.setText(Double.toString(loan.getTotalInterest()));
-	
+			 
 
 		
 		//	Examples- how to read data from the form
