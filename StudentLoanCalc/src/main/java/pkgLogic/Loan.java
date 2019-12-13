@@ -30,9 +30,10 @@ public class Loan {
 		int LoanPaymentCnt = 1;
 		
 		while(RemainingBalance >= this.getPMT() ) {
-			Payment payment = new Payment(RemainingBalance, LoanPaymentCnt++, startDate.plusMonths(1),this);
+			Payment payment = new Payment(RemainingBalance, LoanPaymentCnt++, startDate = startDate.plusMonths(1),this);
 			RemainingBalance = LoanEndAmount;
 			loanPayments.add(payment);
+		
 		}
 	}	
 	
@@ -111,6 +112,18 @@ public class Loan {
 		double PMT = Math.abs(FinanceLib.pmt(this.getInterestRate()/12,this.LoanPaymentCnt,this.LoanBeginAmount,this.LoanEndAmount,this.bCompoundingOption));
 		return PMT;
 		
+	}
+	
+	public double getTotalPayments() {
+		return loanPayments.parallelStream().mapToDouble(p->p.getTotalPayment()).sum();
+		}
+	
+	public ArrayList<Payment> getLoanPayments(){
+		return loanPayments;
+	}
+	
+	public double getTotalInterest() {
+		return getTotalPayments() ;
 	}
 	
 }

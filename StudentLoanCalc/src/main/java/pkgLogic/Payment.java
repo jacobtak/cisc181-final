@@ -53,6 +53,10 @@ public class Payment {
 		return EndingBalance;
 	}
 	
+	public double getTotalPayment() {
+		return this.getPayment() + this.getAdditionalPayment();
+	}
+	
 	
 
 }

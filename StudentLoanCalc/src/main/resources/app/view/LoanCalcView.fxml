@@ -55,7 +55,7 @@
 								<TextField fx:id="InterestRate" GridPane.columnIndex="1" GridPane.rowIndex="1" />
 								<TextField fx:id="NbrOfYears" GridPane.columnIndex="1" GridPane.rowIndex="2" />
 								<DatePicker fx:id="PaymentStartDate" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                        <TextField GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                        		<TextField fx:id = "AdditionalPayment" GridPane.columnIndex="1" GridPane.rowIndex="4" />
 							</children>
 						</GridPane>
 						<HBox prefHeight="152.0" prefWidth="88.0" />
@@ -74,7 +74,8 @@
 							<children>
 								<Label text="Total Payments" />
 								<Label text="Total Interest" GridPane.rowIndex="1" />
-								<Label fx:id="lblTotalPayemnts" prefHeight="18.0" prefWidth="174.0" GridPane.columnIndex="1" />
+								<Label fx:id="lblTotalPayments" prefHeight="18.0" prefWidth="174.0" GridPane.columnIndex="1" />
+								<Label fx:id = "lblTotalInterest" prefHeight="18.0" prefWidth="174.0" GridPane.rowIndex = "1" GridPane.columnIndex="1" />
 							</children>
 						</GridPane>
 					</children>
@@ -84,12 +85,12 @@
 						<TableView fx:id="tvResults" prefHeight="309.0" prefWidth="815.0">
 							<columns>
 								<TableColumn fx:id="colPaymentNumber" prefWidth="75.0" text="Payment #" />
-								<TableColumn prefWidth="114.0" text="Due Date" />
-								<TableColumn prefWidth="102.0" text="Payment" />
-								<TableColumn prefWidth="143.0" text="Additonal Payment" />
-								<TableColumn prefWidth="111.0" text="Interest" />
-								<TableColumn prefWidth="146.0" text="Principle" />
-								<TableColumn prefWidth="122.0" text="Balance" />
+								<TableColumn fx:id = "colDueDate" prefWidth="114.0" text="Due Date" />
+								<TableColumn fx:id = "colPayment" prefWidth="102.0" text="Payment" />
+								<TableColumn fx:id = "colAdditionalPayment" prefWidth="143.0" text="Additonal Payment" />
+								<TableColumn fx:id = "colInterest" prefWidth="111.0" text="Interest" />
+								<TableColumn fx:id = "colPrinciple" prefWidth="146.0" text="Principle" />
+								<TableColumn fx:id = "colBalance" prefWidth="122.0" text="Balance" />
 							</columns>
 						</TableView>
 					</children>

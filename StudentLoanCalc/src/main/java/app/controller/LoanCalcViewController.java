@@ -7,6 +7,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import pkgLogic.Loan;
 import pkgLogic.Payment;
 
 import java.net.URL;
@@ -35,7 +36,13 @@ public class LoanCalcViewController implements Initializable   {
 	private DatePicker PaymentStartDate;
 	
 	@FXML
-	private Label lblTotalPayemnts;
+	private TextField AdditionalPayment;
+	
+	@FXML
+	private Label lblTotalPayments;
+	
+	@FXML
+	private Label lblTotalInterest;
 
 	
 	@FXML
@@ -44,6 +51,23 @@ public class LoanCalcViewController implements Initializable   {
 	@FXML
 	private TableColumn<Payment, Integer> colPaymentNumber;
 	
+	@FXML
+	private TableColumn<Payment, LocalDate> colDueDate;
+	
+	@FXML
+	private TableColumn<Payment, Double> colPayment;
+	
+	@FXML 
+	private TableColumn<Payment, Double> colAdditionalPayment;
+	
+	@FXML
+	private TableColumn<Payment, Double> colInterest;
+	
+	@FXML
+	private TableColumn<Payment, Double> colPrinciple;
+	
+	@FXML
+	private TableColumn<Payment, Double> colBalance;
 	
 	private ObservableList<Payment> paymentList = FXCollections.observableArrayList();
 	
@@ -51,12 +75,13 @@ public class LoanCalcViewController implements Initializable   {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		colPaymentNumber.setCellValueFactory(new PropertyValueFactory<>("paymentNbr"));
+		colDueDate.setCellValueFactory(new PropertyValueFactory<>("dueDate"));
+		colPayment.setCellValueFactory(new PropertyValueFactory<>("payment"));
+		colAdditionalPayment.setCellValueFactory(new PropertyValueFactory<>("additionalPayment"));
+		colInterest.setCellValueFactory(new PropertyValueFactory<>("interest"));
+		colPrinciple.setCellValueFactory(new PropertyValueFactory<>("principle"));
+		colBalance.setCellValueFactory(new PropertyValueFactory<>("balance"));
 		//TODO: Add a 'setCellValueFactory' entry for each column, mapping to each attribute in Payment
-		colPaymentNumber.setCellValueFactory(new PropertyValueFactory<>("dueDate"));
-		colPaymentNumber.setCellValueFactory(new PropertyValueFactory<>("pmt"));
-		colPaymentNumber.setCellValueFactory(new PropertyValueFactory<>("interest"));
-		colPaymentNumber.setCellValueFactory(new PropertyValueFactory<>("principle"));
-		colPaymentNumber.setCellValueFactory(new PropertyValueFactory<>("balance"));
 		
 		tvResults.setItems(paymentList);
 	}
@@ -71,13 +96,35 @@ public class LoanCalcViewController implements Initializable   {
 	 * @version 1.0
 	 * @param event
 	 */
+	
+	
+	
 	@FXML
 	private void btnCalcLoan(ActionEvent event) {
+		
+		tvResults.getItems().clear();
+		lblTotalPayments.setText("");
+		lblTotalInterest.setText("");
+		
+		Loan loan = new Loan(PaymentStartDate.getValue(), Double.parseDouble(LoanAmount.getText()),
+				Double.parseDouble(InterestRate.getText()), Double.parseDouble(AdditionalPayment.getText()),
+				Integer.parseInt(NbrOfYears.getText())*12);
+		
+		paymentList.addAll(loan.getLoanPayments());
+		tvResults.setItems(paymentList);
+		
+		lblTotalPayments.setText(Double.toString(loan.getTotalPayments()));
+		lblTotalInterest.setText(Double.toString(loan.getTotalInterest()));
+	
 
+		
 		//	Examples- how to read data from the form
-		double dLoanAmount = Double.parseDouble(LoanAmount.getText());		
-		lblTotalPayemnts.setText("123");		
+		/*double dLoanAmount = Double.parseDouble(LoanAmount.getText());		
+		lblTotalPayments.setText("240");
+		lblTotalInterest.setText("29,000");
 		LocalDate localDate = PaymentStartDate.getValue();
+		*/
+		
 		
 		/*
 		 * When this button is clicked, you need to do the following:
